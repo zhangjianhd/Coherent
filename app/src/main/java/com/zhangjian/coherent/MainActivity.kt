@@ -20,9 +20,9 @@ class MainActivity : AppCompatActivity() {
 
         dataBinding.viewModel = viewModel
 
-        progressProcess = createProgressProcessForProgressBar(dataBinding.progressBarCoherent)
+        progressCoherent = createCoherentForProgressBar(dataBinding.progressBarCoherent)
 
-        coverProcess = ProgressCoherentRealValueProcess(dataBinding.tcCoherentProgressCover) {
+        coverCoherent = ProgressCoherent(dataBinding.tcCoherentProgressCover) {
             dataBinding.tcCoherentProgressCover.setProgress(it)
         }
 
@@ -33,8 +33,8 @@ class MainActivity : AppCompatActivity() {
 
     private var disposable: Disposable? = null
 
-    private lateinit var progressProcess: ProgressCoherentRealValueProcess
-    private lateinit var coverProcess: ProgressCoherentRealValueProcess
+    private lateinit var progressCoherent: ProgressCoherent
+    private lateinit var coverCoherent: ProgressCoherent
 
     private fun start() {
         disposable?.let {
@@ -51,8 +51,8 @@ class MainActivity : AppCompatActivity() {
                     viewModel.progressRel.set(it * 100f)
                     dataBinding.progressBarNormal.progress = (it * 100).toInt()
                     dataBinding.tcNormalProgressCover.setProgress(it)
-                    progressProcess.setProgress(it)
-                    coverProcess.setProgress(it)
+                    progressCoherent.setProgress(it)
+                    coverCoherent.setProgress(it)
                 }
                 index++
             }
