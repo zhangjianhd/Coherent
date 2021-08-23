@@ -108,9 +108,10 @@ class ProgressCoherentRealValueProcess(
     }
 }
 
-fun createRealValueForProgressBar(progressBar: ProgressBar): ProgressCoherentRealValueProcess {
+fun createProgressProcessForProgressBar(progressBar: ProgressBar): ProgressCoherentRealValueProcess {
+    progressBar.max = 1000
     return ProgressCoherentRealValueProcess(progressBar) {
-        ceil(it * 100).toInt().apply {
+        ceil(it * progressBar.max).toInt().apply {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 progressBar.setProgress(this, true)
             } else {
